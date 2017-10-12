@@ -9,14 +9,15 @@ $(document).on('turbolinks:load', function(){
   submitBtn.click(function(event){
     //prevent default submission behavior.
     event.preventDefault();
-    submitBtn.val("Processing").prop('disabled', true);
+    //Changes submit text and grays it
+    submitBtn.val("Processing").prop('disabled', true); 
     //Collect the credit card fields.
     var ccNum = $('#card_number').val(),
         cvcNum = $('#card_code').val(),
         expMonth = $('#card_month').val(),
         expYear = $('#card_year').val();
     //Use Stripe JS library to check for card errors.
-    var error = false;
+    var error = false; //Boolean TRUE OR FALSE
     //Validate card number.
     if(!Stripe.card.validateCardNumber(ccNum)) {
       error = true;
@@ -44,7 +45,7 @@ $(document).on('turbolinks:load', function(){
         exp_year: expYear
       }, stripeResponseHandler);
     }
-    return false;
+    return false;  //Exit out from function
   });
   //Stripe will return a card token.
   function stripeResponseHandler(status, response) {
